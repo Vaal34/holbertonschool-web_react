@@ -1,5 +1,6 @@
 import $ from "jquery";
 import _ from "lodash";
+import './body.css';
 
 $(function(){
     $("body").append(
@@ -16,4 +17,4 @@ function updateCounter(){
     count++;
     $("#count").text(`${count} click on the button`);
 };   
-$("body button").on("click", _.debounce(updateCounter(), 500))
+$("body button").on("click", _.debounce(updateCounter, 500))
