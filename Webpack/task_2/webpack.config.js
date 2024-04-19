@@ -13,7 +13,7 @@ module.exports = {
                 use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(png|jpg|jpeg|gif|gif|svg)$/,
+                test: /\.(png|jpg|jpeg|gif|svg)$/,
                 use: ["file-loader", "image-webpack-loader"]
             }
         ],
