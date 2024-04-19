@@ -1,20 +1,17 @@
 import $ from "jquery";
 import _ from "lodash";
-import './body.css';
+import './body.css'
 
-$(function(){
-    $("body").append(
-        $("<p>").text("Holberton Dashboard"),
-        $("<p>").text("Dashboard data for the students"),
-        $("<button>").text("Click here to get started"),
-        $("<p id='count'></p>"),
-        $("<p>").text("Copyright - Holberton School")
-    );
-});
 
-const count = 0;
+$('body').append('<p>Dashboard data for the students</p>');
+$('body').append('<button>Click here to get started</button>');
+$('body').append('<p id="count"></p>');
+
+
+let count = 0;
 function updateCounter(){
-    count++;
-    $("#count").text(`${count} click on the button`);
+    count ++
+    $("#count").text(`${count} clicks on the button`);
 };   
-$("body button").on("click", _.debounce(updateCounter, 500))
+
+$("button").on("click", _.debounce(updateCounter, 500));
