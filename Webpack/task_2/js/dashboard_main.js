@@ -3,18 +3,19 @@ import _ from "lodash";
 import '../css/main.css'
 
 
-$('body').append('<div id="logo"></div>')
-$('body').append('<p>Holberton Dashboard</p>');
-$('body').append('<p>Dashboard data for the students</p>');
-$('body').append('<button>Click here to get started</button>');
-$('body').append('<p id="count"></p>');
-$('body').append('<p>Copyright - Holberton School</p>');
-
-
-let count = 0;
-function updateCounter(){
-    count ++
-    $("#count").text(`${count} clicks on the button`);
-};   
+$(function(){
+    $("body").append(
+        $("<p>").text("Holberton Dashboard"),
+        $("<p>").text("Dashboard data for the students"),
+        $("<button>").text("Click here to get started"),
+        $("<p id='count'></p>"),
+        $("<p>").text("Copyright - Holberton School")
+    );
+});
 
 $("button").on("click", _.debounce(updateCounter, 500));
+let count = 0;
+function updateCounter(){
+    count += 1;
+    $("#count").text(`${count} clicks on the button`);
+};   
