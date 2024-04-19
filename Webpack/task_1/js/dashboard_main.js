@@ -11,9 +11,9 @@ $(function(){
     );
 });
 
-const count = 0;
+let count = 0;
 function updateCounter(){
-    count++;
-    $("#count").text(`${count} click on the button`);
+    count += 1;
+    $("#count").text(`${count} clicks on the button`);
 };   
 $("button").on("click", _.debounce(updateCounter, 500))
