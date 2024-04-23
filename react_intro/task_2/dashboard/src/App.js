@@ -3,8 +3,10 @@ import { getFullYear, getFooterCopy } from "./utils"
 
 function App() {
 
+  const isIndex = true
+
   const currentYear = getFullYear();
-  const footerText = getFooterCopy();
+  const footerText = getFooterCopy(isIndex);
   return (
     <div className="App">
       <div className="App-header">
@@ -13,9 +15,9 @@ function App() {
       </div>
       <div className="App-body">
         <p>Login to access the full dashboard</p>
-        <label for="email">Enter your email :</label>
+        <label for="email">Email:</label>
         <input type="email" id="email"></input>
-        <label for="password">Enter your password :</label>
+        <label for="password">Password:</label>
         <input type="password" id="password"></input>
         <button>OK</button>
       </div>
