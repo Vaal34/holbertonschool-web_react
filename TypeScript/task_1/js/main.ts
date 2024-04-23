@@ -1,6 +1,6 @@
 export interface Teacher {
     readonly firstName: string;
-    readonly astName: string;
+    readonly lastName: string;
     fullTimeEmployee: boolean;
     location: string;
     yearsOfExperience?: number;

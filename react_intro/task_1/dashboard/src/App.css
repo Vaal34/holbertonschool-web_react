@@ -1,0 +1,33 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App-header {
+  display: flex;
+  align-items: center;
+  border-bottom: #E0354B solid 3px;
+}
+
+.App-header img {
+  width: 200px;
+  height: 200px;
+}
+
+.App-header h1 {
+  color: #E0354B;
+}
+
+.App-body p{
+  margin-top: 8%;
+  margin-left: 8%;
+  margin-bottom: 30%;
+}
+
+.App-body {
+  border-bottom: #E0354B solid 3px;
+}
+
+.App-footer {
+  text-align: center;
+  font-style: italic;
+}

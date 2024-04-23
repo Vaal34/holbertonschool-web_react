@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
   "keywords": [],
@@ -14,7 +15,6 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@webpack-cli/generators": "^3.0.7",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
   }

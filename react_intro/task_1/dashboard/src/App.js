@@ -1,6 +1,10 @@
 import './App.css';
+import { getFullYear, getFooterCopy } from "../../../task_1/dashboard/src/utils"
 
 function App() {
+
+  const currentYear = getFullYear();
+  const footerText = getFooterCopy();
   return (
     <div className="App">
       <div className="App-header">
@@ -11,7 +15,7 @@ function App() {
         <p>Login to access the full dashboard</p>
       </div>
       <div className="App-footer">
-        <p>Copyright 2020 - holberton School</p>
+        <p>Copyright {currentYear} - {footerText}</p>
       </div>
     </div>
   );
