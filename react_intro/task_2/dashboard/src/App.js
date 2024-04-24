@@ -9,21 +9,21 @@ function App() {
   const footerText = getFooterCopy(isIndex);
   return (
     <div className="App">
-      <div className="App-header">
+      <header className="App-header">
         <img src={require("./holberton-logo.jpg")} className="App-logo" alt="logo" />
         <h1>School dashboard</h1>
-      </div>
-      <div className="App-body">
+      </header>
+      <body className="App-body">
         <p>Login to access the full dashboard</p>
         <label for="email">Email:</label>
         <input type="email" id="email"></input>
         <label for="password">Password:</label>
         <input type="password" id="password"></input>
         <button>OK</button>
-      </div>
-      <div className="App-footer">
+      </body>
+      <footer className="App-footer">
         <p>Copyright {currentYear} - {footerText}</p>
-      </div>
+      </footer>
     </div>
   );
 }
