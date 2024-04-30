@@ -3,6 +3,7 @@ import Notifications from "../Notifications/Notifications"
 import Footer from "../Footer/Footer"
 import Header from "../Header/Header"
 import Login from "../Login/Login"
+import "./App.css"
 
 function App() {
   return (

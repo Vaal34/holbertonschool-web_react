@@ -1,8 +1,7 @@
 import React from 'react';
 import "./Notifications.css"
 import { getLatestNotification } from '../utils/utils'; 
-
-const closePng = require('../assets/close-icon.png');
+import closeIcon from "../assets/close-icon.png";
 
 const Notifications = () => {
 
@@ -21,7 +20,7 @@ const Notifications = () => {
                 border: 'none',
                 float: 'right',
             }}>
-                <img src={closePng} alt="close" width={10}></img>
+                <img src={closeIcon} alt="close" width={10}></img>
             </button>
             <p>Here is the list of notifications</p>
             <ul>
