@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import "./App.css";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import CourseList from "../CourseList/CourseList";
 import { getLatestNotification } from "../utils/utils";
 
@@ -15,6 +15,13 @@ class App extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
   
+  handleKeyDown(event) {
+    if (event.key === "h" && event.ctrlKey) {
+      alert("Logging you out");
+      this.props.logOut();
+    }
+  };
+  
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown);
   }
@@ -23,15 +30,9 @@ class App extends React.Component {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  handleKeyDown = (event) => {
-    if (event.ctrlKey && event.key === 'h') {
-      alert('Logging you out');
-      this.props.logOut();
-    }
-  };
   
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, displayDrawer } = this.props;
     
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -63,8 +64,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  isLoggedIn: propTypes.bool,
-  logOut: propTypes.func
+  isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 App.defaultProps = {
