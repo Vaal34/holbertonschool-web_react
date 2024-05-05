@@ -6,7 +6,6 @@ import Login from '../Login/Login.js';
 import Footer from '../Footer/Footer.js';
 import CourseList from '../CourseList/CourseList.js';
 import { getLatestNotification } from '../utils/utils.js';
-import { fireEvent } from '@testing-library/react';
 
 describe('App Composant', function(){
     it('should App renders without crashing', function(){
