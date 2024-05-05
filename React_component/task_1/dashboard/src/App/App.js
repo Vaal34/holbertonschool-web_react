@@ -39,9 +39,9 @@ class App extends React.Component {
       this.props.logOut();
     }
   };
-
+  
   render() {
-    const { isLoggedIn = true } = this.props;
+    const { isLoggedIn } = this.props;
     
     let componentBody;
     if (isLoggedIn === false) {
@@ -74,7 +74,7 @@ App.propTypes = {
 
 App.defaultProps = {
   logOut: () => {},
-  isLoggedIn: false
+  isLoggedIn: true
 };
 
 export default App;

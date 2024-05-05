@@ -6,6 +6,7 @@ import Login from '../Login/Login.js';
 import Footer from '../Footer/Footer.js';
 import CourseList from '../CourseList/CourseList.js';
 import { getLatestNotification } from '../utils/utils.js';
+import { fireEvent } from '@testing-library/react';
 
 describe('App Composant', function(){
     it('should App renders without crashing', function(){
@@ -49,4 +50,24 @@ describe('App Composant when isLoggedIn is true', function(){
         const wrapper = shallow(<App isLoggedIn={true}/>)
         expect(wrapper.find(CourseList).exists()).toBeTruthy()
     })
+
+    it('pressing control+h calls logOut and alerts "Logging you out"', () => {
+        const events = {};
+        const logout = jest.fn();
+
+        document.addEventListener = jest.fn((event, cb) => {
+            events[event] = cb;
+        });
+
+        window.alert = jest.fn();
+
+        shallow(<App logOut={logout} />);
+
+        events.keydown({ key: "h", ctrlKey: true });
+
+        expect(window.alert).toHaveBeenCalledWith("Logging you out");
+        expect(logout).toHaveBeenCalled();
+
+        jest.restoreAllMocks();
+    });
 })
