@@ -1,0 +1,16 @@
+#CourseList {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    text-align: left;
+    border: 1px solid #dbdada;
+}
+
+#CourseList .hColSpan2{
+    text-align: center;
+}
+
+#CourseList th {
+    border-bottom: 1px solid #dbdada;
+}
