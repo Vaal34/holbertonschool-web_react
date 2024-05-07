@@ -9,11 +9,11 @@ function WithLogging(WrappedComponent) {
     }
     
     componentDidMount() {
-      console.log(`Component ${this.getComponentName()} is mounted on componentDidMount()`);
+      console.log(`Component ${this.getComponentName()} is mounted`);
     }
 
     componentWillUnmount() {
-      console.log(`Component ${this.getComponentName()} is going to unmount on componentWillUnmount()`);
+      console.log(`Component ${this.getComponentName()} is going to unmount`);
     }
 
     render() {

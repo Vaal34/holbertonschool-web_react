@@ -84,3 +84,38 @@ describe('markAsRead fcuntion', () => {
       jest.restoreAllMocks();
     });
 });
+
+
+describe('<Notifications />', () => {
+    it('should not rerender with the same list of notifications', () => {
+        const listNotifications = [
+            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
+            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
+        ];
+        const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
+        const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications });
+        expect(shouldUpdate).toBe(false);
+    });
+
+    it('should rerender with a longer list of notifications', () => {
+        const initialList = [
+            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
+        ];
+        const updatedList = [
+            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
+            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
+        ];
+        const wrapper = shallow(<Notifications listNotifications={initialList} />);
+        const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications: updatedList });
+        expect(shouldUpdate).toBe(true);
+    });
+
+    it('should render correct number of NotificationItem components', () => {
+        const listNotifications = [
+            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
+            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
+        ];
+        const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
+        expect(wrapper.find(NotificationItem)).toHaveLength(listNotifications.length);
+    });
+});

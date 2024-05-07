@@ -12,6 +12,10 @@ class Notifications extends React.Component {
         this.closeClick = this.closeClick;
     }
 
+    shouldComponentUpdate(nextProps) {
+        return nextProps.listNotifications.length > this.props.listNotifications.length;
+    }
+
     markAsRead(id) {
         console.log(`Notification ${id} has been marked as read`);
     }
