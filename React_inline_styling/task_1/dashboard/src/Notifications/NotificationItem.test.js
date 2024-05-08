@@ -28,15 +28,4 @@ describe('NotificationItem Component', () => {
     const wrapper = shallow(<NotificationItem html={html} />);
     expect(wrapper.prop('dangerouslySetInnerHTML')).toEqual(html);
   });
-
-  /*
-  it('should calls markAsRead with the correct ID when clicked', () => {
-    const id = 34;
-    const mockMarkAsRead = jest.fn();
-    const wrapper = shallow(<NotificationItem type="default" value="test" markAsRead={mockMarkAsRead} />);
-    wrapper.simulate('click', id);
-    expect(mockMarkAsRead).toHaveBeenCalledWith(id);
-    jest.restoreAllMocks();
-  });
-  */
 }); 

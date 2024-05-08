@@ -79,11 +79,20 @@ class App extends React.Component {
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,
+  listNotifications: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    type: PropTypes.string,
+    value: PropTypes.string,
+    html: PropTypes.shape({
+      __html: PropTypes.string,
+    }),
+  })),
 };
 
 App.defaultProps = {
   logOut: () => {},
-  isLoggedIn: true
+  isLoggedIn: true,
+  listNotifications: [],
 }
 
 const styles = StyleSheet.create({
