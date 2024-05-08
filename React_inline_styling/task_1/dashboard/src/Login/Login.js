@@ -4,7 +4,7 @@ import { StyleSheet, css } from 'aphrodite';
 function Login() {
 
   return (
-    <div className={css.apply(styles.AppBody)}>
+    <div className={css(styles.AppBody)}>
       <p className={css(styles.pAndLabelLogin)}>Login to access the full dashboard</p>
       <label className={css(styles.pAndLabelLogin)} htmlFor="email">Email:</label>
       <input className={css(styles.LoginInput)} type="email" id="email"></input>
