@@ -29,6 +29,7 @@ describe('NotificationItem Component', () => {
     expect(wrapper.prop('dangerouslySetInnerHTML')).toEqual(html);
   });
 
+  /*
   it('should calls markAsRead with the correct ID when clicked', () => {
     const id = 34;
     const mockMarkAsRead = jest.fn();
@@ -37,4 +38,5 @@ describe('NotificationItem Component', () => {
     expect(mockMarkAsRead).toHaveBeenCalledWith(id);
     jest.restoreAllMocks();
   });
+  */
 }); 

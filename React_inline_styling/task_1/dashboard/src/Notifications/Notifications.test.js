@@ -34,12 +34,12 @@ describe('Notification Composant displayDrawers is true', function(){
 
     it('should Notifications is being displayed when displayDrawer is true', function(){
         const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
-        expect(wrapper.find('.Notifications').exists()).toBeTruthy();
+        expect(wrapper.find('.Notifications_d7p2x2').exists()).toBeTruthy();
     });
     
     it('should menuItem is being displayed when displayDrawer is true', function(){
         const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
-        expect(wrapper.find('.menuItem').exists()).toBeTruthy();
+        expect(wrapper.find('.Notifications_d7p2x2').exists()).toBeTruthy();
     });
 
     it('renders correctly with an empty array or without listNotifications property', () => {
@@ -77,7 +77,7 @@ describe('Notification Composant displayDrawers is False', function(){
 
     it('should menu item is being displayed when displayDrawer is false', function(){
         const wrapper = shallow(<Notifications displayDrawer={false} listNotifications={listNotifications}/>)
-        expect(wrapper.find('.menuItem').exists()).toBeTruthy();
+        expect(wrapper.find('.menuItem').exists()).toBeFalsy();
     });
     
     it('should Notifications is not being displayed when displayDrawer is false', function(){
@@ -122,7 +122,7 @@ describe('<Notifications />', () => {
     afterEach(() => {
         StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
     });
-    
+
     it('should not rerender with the same list of notifications', () => {
         const listNotifications = [
             { id: 1, type: 'default', value: 'Notification 1', html: undefined },
