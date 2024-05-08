@@ -46,13 +46,6 @@ class Notifications extends React.Component {
                 <ul>
                 {listNotifications && listNotifications.length !== 0 ? (
                     listNotifications.map(notification => (
-                    <li
-                        key={notification.id}
-                        className={css(
-                        notification.type === 'default' && styles.liDefault,
-                        notification.type === 'urgent' && styles.liUrgent
-                        )}
-                    >
                         <NotificationItem 
                             key={notification.id} 
                             type={notification.type} 
@@ -61,7 +54,6 @@ class Notifications extends React.Component {
                             markAsRead={this.markAsRead}
                             id={notification.id}
                         />
-                        </li>
                     ))
                 ) : (
                     <p>No new notification for now</p>
