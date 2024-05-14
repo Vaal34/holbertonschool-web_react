@@ -9,12 +9,26 @@ import { getLatestNotification } from "../utils/utils";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
 import { StyleSheet, css } from 'aphrodite';
+import { useState } from "react";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props); 
+    this.state = {
+      displayDrawer: false
+    };
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+  }
+
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
   }
   
   handleKeyDown(event) {
@@ -50,7 +64,12 @@ class App extends React.Component {
 
     return (
       <>
-        <Notifications displayDrawer={true} listNotifications={listNotifications}/>
+        <Notifications 
+          displayDrawer={this.state.displayDrawer} 
+          listNotifications={listNotifications}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
+        />
         <div className="App">
           <Header />
         </div>

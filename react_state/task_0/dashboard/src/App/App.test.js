@@ -5,7 +5,6 @@ import Notifications from '../Notifications/Notifications.js';
 import Login from '../Login/Login.js';
 import Footer from '../Footer/Footer.js';
 import CourseList from '../CourseList/CourseList.js';
-import { getLatestNotification } from '../utils/utils.js';
 import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('App Composant', function(){
@@ -41,6 +40,23 @@ describe('App Composant', function(){
     it('should CourseList is not displayed when is not Log', function(){
         const wrapper = shallow(<App isLoggedIn={false}/>)
         expect(wrapper.find(CourseList).exists()).toBeFalsy()
+    })
+
+    it('should verify that the default state for displayDrawer is false', function(){
+        const wrapper = shallow(<App isLoggedIn={true}/>)
+        expect(wrapper.state('displayDrawer')).toBe(false)
+    })
+    
+    it('should verify that the default state for displayDrawer is false and after calling handleDisplayDrawer the state should be true', function(){
+        const wrapper = shallow(<App isLoggedIn={true}/>)
+        wrapper.instance().handleDisplayDrawer()
+        expect(wrapper.state('displayDrawer')).toBe(true)
+    })
+    
+    it('should verify that the default state for displayDrawer is false and after calling handleHideDrawer the state should be false', function(){
+        const wrapper = shallow(<App isLoggedIn={true}/>)
+        wrapper.instance().handleHideDrawer()
+        expect(wrapper.state('displayDrawer')).toBe(false)
     })
 })
 

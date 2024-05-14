@@ -1,7 +1,7 @@
 import React from 'react';
 import closeIcon from "../assets/close-icon.png";
 import NotificationItem from './NotificationItem';
-import propTypes from "prop-types"
+import propTypes, { func } from "prop-types"
 import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 
@@ -24,22 +24,25 @@ class Notifications extends React.Component {
         console.log("Close button has been clicked");
     };
     render(){
-        const { displayDrawer, listNotifications } = this.props;
+        const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
 
         return(
             <div className={css(styles.CompNotification)}>
-            <div className={css(styles.ParagraphemenuItem)}><p>Your notifications</p></div>
+            <div className={css(styles.ParagraphemenuItem)}><p onClick={handleDisplayDrawer()}>Your notifications</p></div>
             { displayDrawer && (
             <div className={css(styles.Notifications)}>
-                <button className={css(styles.ButtotncompNotification)}
-                onClick={this.closeClick}
-                aria-label="Dismiss"
-                style={{ 
-                    cursor: 'pointer',
-                    backgroundColor: 'transparent', 
-                    border: 'none',
-                    float: 'right',
-                }}>
+                <button className={css(styles.ButtoncompNotification)}
+                    onClick={() => {
+                        this.closeClick();
+                        handleHideDrawer();
+                    }}
+                    aria-label="Dismiss"
+                    style={{ 
+                        cursor: 'pointer',
+                        backgroundColor: 'transparent', 
+                        border: 'none',
+                        float: 'right',
+                    }}>
                     <img className={css(styles.ImgagecompNotification)} src={closeIcon} alt="close" width={10}></img>
                 </button>
                 <p>Here is the list of notifications</p>
@@ -68,12 +71,16 @@ class Notifications extends React.Component {
 
 Notifications.propTypes = {
     listNotifications: propTypes.arrayOf(propTypes.shape(NotificationItemShape)),
-    displayDrawer: propTypes.bool
+    displayDrawer: propTypes.bool,
+    handleDisplayDrawer: propTypes.func,
+    handleHideDrawer: propTypes.func
 };
 
 Notifications.defaultProps = {
     listNotifications: [],
-    displayDrawer: true,
+    displayDrawer: false,
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {},
 };
 
 const opacityAnimation = {
@@ -146,7 +153,7 @@ const styles = StyleSheet.create({
         width: 'auto'
     },
 
-    ButtotncompNotification : {
+    ButtoncompNotification : {
         padding: '0',
         marginRight: '3%',
         marginTop: '1%'

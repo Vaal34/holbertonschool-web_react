@@ -4,6 +4,7 @@ import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { getLatestNotification } from '../utils/utils';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { func } from 'prop-types';
 
 
 describe('Notification Composant displayDrawers is true', function(){
@@ -57,6 +58,21 @@ describe('Notification Composant displayDrawers is true', function(){
         const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
         expect(wrapper.contains('No new notification for now')).toEqual(true);
     });
+
+    it('clicking on the menu item calls handleDisplayDrawer', function(){
+        const handleHideDrawerMock = jest.fn();
+        const wrapper = shallow(
+            <Notifications
+                displayDrawer={true}
+                listNotifications={listNotifications}
+                handleDisplayDrawer={() => {}}
+                handleHideDrawer={handleHideDrawerMock}
+            />
+        );
+        const button = wrapper.find('button')
+        button.simulate('click');
+        expect(handleHideDrawerMock).toHaveBeenCalled();
+    });
 });
 
 describe('Notification Composant displayDrawers is False', function(){
@@ -83,6 +99,21 @@ describe('Notification Composant displayDrawers is False', function(){
     it('should Notifications is not being displayed when displayDrawer is false', function(){
         const wrapper = shallow(<Notifications displayDrawer={false} listNotifications={listNotifications}/>)
         expect(wrapper.find('.Notifications').exists()).toBeFalsy();
+    });
+
+    it('clicking on the menu item calls handleDisplayDrawer', function(){
+        const handleDisplayDrawerMock = jest.fn();
+        const wrapper = shallow(
+            <Notifications
+                displayDrawer={false}
+                listNotifications={[]}
+                handleDisplayDrawer={handleDisplayDrawerMock}
+                handleHideDrawer={() => {}}
+            />
+        );
+        const button = wrapper.find('p').filterWhere(node => node.text() === 'Your notifications');
+        button.simulate('click');
+        expect(handleDisplayDrawerMock).toHaveBeenCalled();
     });
 });
 
