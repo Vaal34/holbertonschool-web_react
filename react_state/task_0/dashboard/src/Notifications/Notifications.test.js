@@ -72,6 +72,7 @@ describe('Notification Composant displayDrawers is true', function(){
         const button = wrapper.find('button')
         button.simulate('click');
         expect(handleHideDrawerMock).toHaveBeenCalled();
+        jest.restoreAllMocks();
     });
 });
 
@@ -114,6 +115,7 @@ describe('Notification Composant displayDrawers is False', function(){
         const button = wrapper.find('p').filterWhere(node => node.text() === 'Your notifications');
         button.simulate('click');
         expect(handleDisplayDrawerMock).toHaveBeenCalled();
+        jest.restoreAllMocks();
     });
 });
 
