@@ -9,14 +9,13 @@ import { getLatestNotification } from "../utils/utils";
 import BodySectionWithMarginBottom from "../BodySection/BodySectionWithMarginBottom";
 import BodySection from "../BodySection/BodySection";
 import { StyleSheet, css } from 'aphrodite';
-import { useState } from "react";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props); 
     this.state = {
-      displayDrawer: false
+      displayDrawer: false,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);

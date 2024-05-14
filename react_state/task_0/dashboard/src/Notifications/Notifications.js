@@ -13,7 +13,8 @@ class Notifications extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.listNotifications.length > this.props.listNotifications.length;
+        return  nextProps.listNotifications > this.props.listNotifications ||
+        nextProps.displayDrawer != this.props.displayDrawer;
     }
 
     markAsRead(id) {
@@ -24,18 +25,15 @@ class Notifications extends React.Component {
         console.log("Close button has been clicked");
     };
     render(){
-        const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
+        const { handleDisplayDrawer, handleHideDrawer } = this.props;
 
         return(
             <div className={css(styles.CompNotification)}>
-            <div className={css(styles.ParagraphemenuItem)}><p onClick={handleDisplayDrawer()}>Your notifications</p></div>
-            { displayDrawer && (
+            <div className={css(styles.ParagraphemenuItem)}><p onClick={handleDisplayDrawer}>Your notifications</p></div>
+            { this.props.displayDrawer && (
             <div className={css(styles.Notifications)}>
                 <button className={css(styles.ButtoncompNotification)}
-                    onClick={() => {
-                        this.closeClick();
-                        handleHideDrawer();
-                    }}
+                    onClick={handleHideDrawer}
                     aria-label="Dismiss"
                     style={{ 
                         cursor: 'pointer',
@@ -47,8 +45,8 @@ class Notifications extends React.Component {
                 </button>
                 <p>Here is the list of notifications</p>
                 <ul className={css(styles.ul)}>
-                {listNotifications && listNotifications.length !== 0 ? (
-                    listNotifications.map(notification => (
+                {this.props.listNotifications && this.props.listNotifications.length !== 0 ? (
+                    this.props.listNotifications.map(notification => (
                         <NotificationItem 
                             key={notification.id} 
                             type={notification.type} 
@@ -70,15 +68,15 @@ class Notifications extends React.Component {
 };
 
 Notifications.propTypes = {
-    listNotifications: propTypes.arrayOf(propTypes.shape(NotificationItemShape)),
     displayDrawer: propTypes.bool,
+    listNotifications: propTypes.arrayOf(propTypes.shape(NotificationItemShape)),
     handleDisplayDrawer: propTypes.func,
     handleHideDrawer: propTypes.func
 };
 
 Notifications.defaultProps = {
-    listNotifications: [],
     displayDrawer: false,
+    listNotifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
 };
