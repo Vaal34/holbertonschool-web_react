@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Notifications from "../Notifications/Notifications";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayDrawer: false
+      displayDrawer: false,
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -29,6 +29,7 @@ class App extends React.Component {
   handleHideDrawer() {
     this.setState({ displayDrawer: false });
   }
+
   handleKeyDown(event) {
     if (event.key === "h" && event.ctrlKey) {
       alert("Logging you out");
@@ -43,6 +44,7 @@ class App extends React.Component {
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown);
   }
+
 
   render() {
     const { isLoggedIn, displayDrawer } = this.props;
