@@ -14,9 +14,9 @@ function Footer() {
     <AppContext.Consumer>
       {(props) => (
         <footer className="App-footer">
-          <p>Copyright {currentYear} - {footerText}</p>
+          <p className="Copyright">Copyright {currentYear} - {footerText}</p>
           { props.user.isLoggedIn && (
-            <p>Contact us</p>
+            <p className="ContactUs">Contact us</p>
           )}
         </footer>
       )}

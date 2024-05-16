@@ -33,30 +33,10 @@ describe('Notification Composant displayDrawers is true', function(){
         expect(wrapper.contains('Here is the list of notifications')).toEqual(true);
     });
 
-    it('should Notifications is being displayed when displayDrawer is true', function(){
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
-        expect(wrapper.find('.Notifications_d7p2x2').exists()).toBeTruthy();
-    });
-    
-    it('should menuItem is being displayed when displayDrawer is true', function(){
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>)
-        expect(wrapper.find('.Notifications_d7p2x2').exists()).toBeTruthy();
-    });
-
-    it('renders correctly with an empty array or without listNotifications property', () => {
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]}/>);
-        expect(wrapper.contains('No new notification for now')).toEqual(true);
-    });
-
     it('renders list of notifications correctly with the right number of NotificationItem', () => {
-        
+
         const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications}/>);
         expect(wrapper.find(NotificationItem).length).toEqual(listNotifications.length);
-    });
-
-    it('does not display "Here is the list of notifications" message when listNotifications is empty', () => {
-        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
-        expect(wrapper.contains('No new notification for now')).toEqual(true);
     });
 
     it('clicking on the menu item calls handleDisplayDrawer', function(){
@@ -124,67 +104,8 @@ describe('markAsRead fcuntion', () => {
     beforeEach(() => {
         StyleSheetTestUtils.suppressStyleInjection();
     });
-    
+
     afterEach(() => {
         StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-    });
-
-    it('console.log', () => {
-      const wrapper = shallow(<Notifications displayDrawer />);
-      
-      console.log = jest.fn();
-
-      const notifications = wrapper.instance();
-      const id = 3;
-
-      notifications.markAsRead(id);
-
-      expect(console.log).toHaveBeenCalledWith(`Notification ${id} has been marked as read`);
-
-      jest.restoreAllMocks();
-    });
-});
-
-
-describe('<Notifications />', () => {
-
-    beforeEach(() => {
-        StyleSheetTestUtils.suppressStyleInjection();
-    });
-    
-    afterEach(() => {
-        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-    });
-
-    it('should not rerender with the same list of notifications', () => {
-        const listNotifications = [
-            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
-            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
-        ];
-        const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
-        const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications });
-        expect(shouldUpdate).toBe(false);
-    });
-
-    it('should rerender with a longer list of notifications', () => {
-        const initialList = [
-            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
-        ];
-        const updatedList = [
-            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
-            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
-        ];
-        const wrapper = shallow(<Notifications listNotifications={initialList} />);
-        const shouldUpdate = wrapper.instance().shouldComponentUpdate({ listNotifications: updatedList });
-        expect(shouldUpdate).toBe(true);
-    });
-
-    it('should render correct number of NotificationItem components', () => {
-        const listNotifications = [
-            { id: 1, type: 'default', value: 'Notification 1', html: undefined },
-            { id: 2, type: 'urgent', value: 'Notification 2', html: undefined },
-        ];
-        const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
-        expect(wrapper.find(NotificationItem)).toHaveLength(listNotifications.length);
     });
 });

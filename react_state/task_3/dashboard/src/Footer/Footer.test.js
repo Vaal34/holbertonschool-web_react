@@ -1,25 +1,24 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import Footer from './Footer';
-import { StyleSheetTestUtils } from 'aphrodite';
+import React from "react";
+import { shallow } from "enzyme";
+import Footer from "./Footer";
+import { getFullYear, getFooterCopy } from "../utils/utils";
 
-describe('Notification Composant', function(){
+describe("Footer", () => {
+  it("renders without crashing", () => {
+    shallow(<Footer />);
+  });
 
-    beforeEach(() => {
-        StyleSheetTestUtils.suppressStyleInjection();
-    });
-    
-    afterEach(() => {
-        StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-    });
+  it("displays the correct copyright text", () => {
+    const wrapper = shallow(<Footer />).dive()
+    const currentYear = getFullYear();
+    const footerText = getFooterCopy(true);
+    const expectedText = `Copyright ${currentYear} - ${footerText}`;
+    expect(wrapper.find("p").text()).toEqual(expectedText);
+  });
 
-    it('should Footer renders without crashing', function(){
-        const wrapper = shallow(<Footer />)
-        expect(wrapper.exists()).toBe(true)
-    });
-
-    it('should have the text Copyright', function(){
-        const wrapper = shallow(<Footer />)
-        expect(wrapper.find('p').text()).toContain("Copyright")
-    })
+  it("does not display the 'Contact us' text when user is not logged in", () => {
+    const wrapper = shallow(<Footer />)
+    wrapper.setProps({ user: { isLoggedIn: false } });
+    expect(wrapper.find(".ContactUs").exists()).toBe(false);
+  });
 });

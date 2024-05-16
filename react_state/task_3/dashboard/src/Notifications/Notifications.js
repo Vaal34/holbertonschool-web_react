@@ -5,27 +5,18 @@ import propTypes, { func } from "prop-types"
 import NotificationItemShape from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 
-class Notifications extends React.Component {
+class Notifications extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.markAsRead = this.markAsRead.bind(this);
         this.closeClick = this.closeClick;
-    }
 
-    shouldComponentUpdate(nextProps) {
-        return  nextProps.listNotifications > this.props.listNotifications ||
-        nextProps.displayDrawer != this.props.displayDrawer;
     }
-
-    markAsRead(id) {
-        console.log(`Notification ${id} has been marked as read`);
-    }
-
     closeClick = () => {
         console.log("Close button has been clicked");
     };
     render(){
         const { handleDisplayDrawer, handleHideDrawer } = this.props;
+        const { markNotificationAsRead } = this.props
 
         return(
             <div className={css(styles.CompNotification)}>
@@ -35,9 +26,9 @@ class Notifications extends React.Component {
                 <button className={css(styles.ButtoncompNotification)}
                     onClick={handleHideDrawer}
                     aria-label="Dismiss"
-                    style={{ 
+                    style={{
                         cursor: 'pointer',
-                        backgroundColor: 'transparent', 
+                        backgroundColor: 'transparent',
                         border: 'none',
                         float: 'right',
                     }}>
@@ -47,13 +38,13 @@ class Notifications extends React.Component {
                 <ul className={css(styles.ul)}>
                 {this.props.listNotifications && this.props.listNotifications.length !== 0 ? (
                     this.props.listNotifications.map(notification => (
-                        <NotificationItem 
-                            key={notification.id} 
-                            type={notification.type} 
-                            value={notification.value} 
+                        <NotificationItem
+                            key={notification.id}
+                            type={notification.type}
+                            value={notification.value}
                             html={notification.html}
-                            markAsRead={this.markAsRead}
                             id={notification.id}
+                            markAsRead={() => markNotificationAsRead(notification.id)}
                         />
                     ))
                 ) : (
@@ -101,7 +92,7 @@ const bounceAnimation = {
 
 
 const styles = StyleSheet.create({
-    
+
     Notifications: {
         border: 'dotted 2px #E0354B',
         padding: '1% 0% 0% 3%',

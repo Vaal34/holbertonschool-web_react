@@ -6,6 +6,7 @@ import Login from '../Login/Login.js';
 import Footer from '../Footer/Footer.js';
 import CourseList from '../CourseList/CourseList.js';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { getLatestNotification } from '../utils/utils.js';
 
 describe('App Composant', function(){
 
@@ -58,6 +59,24 @@ describe('App Composant', function(){
         wrapper.instance().handleHideDrawer()
         expect(wrapper.state('displayDrawer')).toBe(false)
     })
+
+
+    it('should update the state correctly when calling markNotificationAsRead', function() {
+      const wrapper = shallow(<App />);
+      const mockNotifications = [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+      ];
+      wrapper.setState({ listNotifications: mockNotifications });
+
+      const idToMarkAsRead = 1;
+      wrapper.instance().markNotificationAsRead(idToMarkAsRead);
+      const updatedNotifications = wrapper.state('listNotifications');
+      const markedNotification = updatedNotifications.find(notification => notification.id === idToMarkAsRead);
+
+      expect(markedNotification).toBeUndefined();
+    });
 })
 
 describe('App Composant when isLoggedIn is true', function(){
@@ -97,11 +116,9 @@ describe('App Composant when isLoggedIn is true', function(){
 })
 
 describe('App Component', function() {
-    let wrapper;
 
     beforeEach(() => {
       StyleSheetTestUtils.suppressStyleInjection();
-      wrapper = shallow(<App />);
     });
 
     afterEach(() => {
@@ -109,24 +126,29 @@ describe('App Component', function() {
     });
 
     it('should render without crashing', function() {
+      const wrapper = shallow(<App />);
       expect(wrapper.exists()).toBe(true);
     });
 
     it('should have the default state for displayDrawer set to false', function() {
+      const wrapper = shallow(<App />);
       expect(wrapper.state('displayDrawer')).toBe(false);
     });
 
     it('should update the state correctly when handleDisplayDrawer is called', function() {
+      const wrapper = shallow(<App />);
       wrapper.instance().handleDisplayDrawer();
       expect(wrapper.state('displayDrawer')).toBe(true);
     });
 
     it('should update the state correctly when handleHideDrawer is called', function() {
+      const wrapper = shallow(<App />);
       wrapper.instance().handleHideDrawer();
       expect(wrapper.state('displayDrawer')).toBe(false);
     });
 
     it('should update the state correctly when handleLogIn is called', function() {
+      const wrapper = shallow(<App />);
       const email = 'test@example.com';
       const password = 'password';
       wrapper.instance().handleLogIn(email, password);
@@ -138,6 +160,7 @@ describe('App Component', function() {
     });
 
     it('should update the state correctly when handleLogout is called', function() {
+      const wrapper = shallow(<App />);
       wrapper.instance().handleLogout();
       expect(wrapper.state('user')).toEqual({
         email: '',
@@ -147,19 +170,23 @@ describe('App Component', function() {
     });
 
     it('should render Notifications component', function() {
+      const wrapper = shallow(<App />);
       expect(wrapper.find(Notifications).exists()).toBe(true);
     });
 
     it('should render Footer component', function() {
+      const wrapper = shallow(<App />);
       expect(wrapper.find(Footer).exists()).toBe(true);
     });
 
     it('should render Login component when user is not logged in', function() {
+      const wrapper = shallow(<App />);
       wrapper.setState({ user: { isLoggedIn: false } });
       expect(wrapper.find(Login).exists()).toBe(true);
     });
 
     it('should render CourseList component when user is logged in', function() {
+      const wrapper = shallow(<App />);
       wrapper.setState({ user: { isLoggedIn: true } });
       expect(wrapper.find(CourseList).exists()).toBe(true);
     });

@@ -15,12 +15,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       displayDrawer: false,
-      user: userLogout
+      user: userLogout,
+      listNotifications: [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
+      ]
     };
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.handleLogIn = this.handleLogIn.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   handleDisplayDrawer() {
@@ -60,6 +66,11 @@ class App extends React.Component {
     });
   };
 
+  markNotificationAsRead(id) {
+    const updatedNotifications = this.state.listNotifications.filter(notification => notification.id !== id);
+    this.setState({ listNotifications: updatedNotifications });
+  }
+
   render() {
     const { displayDrawer, user } = this.state;
     const { isLoggedIn } = user;
@@ -70,19 +81,14 @@ class App extends React.Component {
       { id: 3, name: 'React', credit: 40 }
     ];
 
-    const listNotifications = [
-      { id: 1, type: "default", value: "New course available" },
-      { id: 2, type: "urgent", value: "New resume available" },
-      { id: 3, type: "urgent", html: { __html: getLatestNotification() }},
-    ];
-
     return (
       <AppContext.Provider value={{ user, logOut: this.handleLogout }}>
           <Notifications
             displayDrawer={this.state.displayDrawer}
-            listNotifications={listNotifications}
+            listNotifications={this.state.listNotifications}
             handleDisplayDrawer={this.handleDisplayDrawer}
             handleHideDrawer={this.handleHideDrawer}
+            markNotificationAsRead={this.markNotificationAsRead}
           />
           <div className="App">
             <Header />
