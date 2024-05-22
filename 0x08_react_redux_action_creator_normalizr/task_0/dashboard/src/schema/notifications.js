@@ -1,5 +1,8 @@
 const dataNotif = require('../../../../notification.json');
 
 export function getAllNotificationsByUser(userId){
-    return dataNotif.filter(notification => notification.author.id === userId);
-}
+    const userContext = dataNotif
+        .filter(notification => notification.author.id === userId)
+        .map(notification => notification.context);
+    return userContext
+};
