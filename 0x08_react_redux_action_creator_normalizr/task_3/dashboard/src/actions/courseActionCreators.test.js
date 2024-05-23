@@ -1,26 +1,24 @@
-import { selectCourse, unSelectCourse } from "../src/actions/courseActionCreators";
-import { SELECT_COURSE, UNSELECT_COURSE } from "../src/actions/courseActionTypes";
+import { selectCourse, unSelectCourse } from "./courseActionCreators";
+import { SELECT_COURSE, UNSELECT_COURSE } from "./courseActionTypes";
 
 describe("selectCourse", () => {
     it("should return the correct action object", () => {
-        const index = 1;
         const expectedAction = {
             type: SELECT_COURSE,
             index: 1
         };
-        const action = selectCourse(index);
+        const action = selectCourse(1);
         expect(action).toEqual(expectedAction);
     });
 });
 
 describe("unSelectCourse", () => {
     it("should return the correct action object", () => {
-        const index = 1;
         const expectedAction = {
             type: UNSELECT_COURSE,
             index: 1
         };
-        const action = unSelectCourse(index);
+        const action = unSelectCourse(1);
         expect(action).toEqual(expectedAction);
     });
 });
