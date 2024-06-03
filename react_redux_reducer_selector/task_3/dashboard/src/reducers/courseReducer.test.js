@@ -1,6 +1,6 @@
 import courseReducer from '../reducers/courseReducer';
 import {
-  FETCH_COURSES,
+  FETCH_COURSE_SUCCESS,
   SELECT_COURSE,
   UNSELECT_COURSE,
 } from '../actions/courseActionTypes';
@@ -15,7 +15,7 @@ describe('courseReducer', () => {
 
   it('should handle FETCH_COURSES', () => {
     const courses = [{ id: 1, name: 'Course 1' }, { id: 2, name: 'Course 2' }];
-    const action = { type: FETCH_COURSES, courses };
+    const action = { type: FETCH_COURSE_SUCCESS, courses };
     const newState = courseReducer([], action);
     expect(newState).toEqual(courses);
   });
