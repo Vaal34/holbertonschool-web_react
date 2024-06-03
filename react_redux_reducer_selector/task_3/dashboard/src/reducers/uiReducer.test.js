@@ -2,11 +2,11 @@ import uiReducer from './uiReducer';
 import { DISPLAY_NOTIFICATION_DRAWER } from '../actions/uiActionTypes';
 
 describe('uiReducer', () => {
-  const initialState = {
+  const initialState = Map({
     isNotificationDrawerVisible: false,
     isUserLoggedIn: false,
     user: {},
-  };
+  });
 
   it('should return the initial state when no action is passed', () => {
     expect(uiReducer(undefined, {type: ''})).toEqual(initialState);
